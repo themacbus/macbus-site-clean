@@ -1,10 +1,16 @@
 import React from "react";
+import PageTemplate from "./PageTemplate";
 
 export default function HowToRide() {
   return (
-    <main className="p-6">
-      <h1 className="text-3xl font-bold mb-4">How To Ride</h1>
-      <p>Step-by-step instructions on booking and using The MAC Bus service.</p>
-    </main>
+    <PageTemplate title="How To Ride The MAC Bus">
+      <ol className="list-decimal list-inside space-y-2">
+        <li>Check the bus routes and schedules on our Programs page.</li>
+        <li>Plan your trip ahead of time.</li>
+        <li>Purchase your ticket online or from the driver.</li>
+        <li>Be ready at your stop a few minutes early.</li>
+        <li>Enjoy your ride!</li>
+      </ol>
+    </PageTemplate>
   );
 }

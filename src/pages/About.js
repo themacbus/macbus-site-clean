@@ -1,18 +1,21 @@
 import React from "react";
+import PageTemplate from "./PageTemplate";
 
 export default function About() {
   return (
-    <main style={{ padding: 20 }}>
-      <h1>About The MAC Bus</h1>
+    <PageTemplate title="About Us">
       <p>
-        The MAC Bus is dedicated to providing equitable and accessible
-        transportation services for the community. We strive to ensure
-        everyone can travel with dignity and ease.
+        The MAC Bus is a community-focused transportation service dedicated to
+        providing accessible and equitable travel options.
       </p>
       <p>
-        Our mission is to reduce transportation barriers and support
-        community mobility through reliable shuttle services.
+        Founded in 2005, we have served thousands of riders with dedication and
+        care.
       </p>
-    </main>
+      <p>
+        Our mission is to make transportation easy, affordable, and accessible to
+        all.
+      </p>
+    </PageTemplate>
   );
 }
