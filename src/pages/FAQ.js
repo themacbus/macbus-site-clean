@@ -1,17 +1,46 @@
 import React from "react";
-import PageTemplate from "./PageTemplate";
+
+const faqs = [
+  {
+    question: "Who can use The MAC Bus services?",
+    answer:
+      "Our services are available primarily to families of incarcerated individuals and underserved community members who need reliable transportation to visits and essential appointments.",
+  },
+  {
+    question: "How do I schedule a ride?",
+    answer:
+      "You can schedule a ride by filling out our online form or calling our hotline during business hours. We recommend booking at least 48 hours in advance.",
+  },
+  {
+    question: "Are there any fees for the rides?",
+    answer:
+      "We strive to keep rides affordable and often provide services free of charge or at a reduced rate depending on your circumstances. Contact us for details.",
+  },
+  {
+    question: "What areas do you serve?",
+    answer:
+      "Currently, The MAC Bus operates within the greater metropolitan area and surrounding counties. Please check our coverage map or contact us for specifics.",
+  },
+  {
+    question: "Can I volunteer or donate?",
+    answer:
+      "Absolutely! We welcome volunteers and donors. Visit our Support page to learn how you can get involved and help us keep the wheels turning.",
+  },
+];
 
 export default function FAQ() {
   return (
-    <PageTemplate title="Frequently Asked Questions">
-      <h2 className="font-semibold text-xl mb-2">How do I buy tickets?</h2>
-      <p>You can purchase tickets online or directly from the bus driver.</p>
+    <main className="min-h-screen bg-white text-gray-900 px-6 py-16 max-w-5xl mx-auto">
+      <h1 className="text-4xl font-bold mb-10 text-black-700 text-center">Frequently Asked Questions</h1>
 
-      <h2 className="font-semibold text-xl mt-4 mb-2">Are the buses wheelchair accessible?</h2>
-      <p>Yes, all our buses are fully accessible and equipped with ramps.</p>
-
-      <h2 className="font-semibold text-xl mt-4 mb-2">What are the operating hours?</h2>
-      <p>Our buses operate Monday through Saturday, 6am to 10pm.</p>
-    </PageTemplate>
+      <section className="space-y-8">
+        {faqs.map(({ question, answer }, idx) => (
+          <div key={idx} className="border rounded-lg p-6 shadow-sm hover:shadow-md transition">
+            <h2 className="text-2xl font-semibold mb-3">{question}</h2>
+            <p className="text-lg leading-relaxed">{answer}</p>
+          </div>
+        ))}
+      </section>
+    </main>
   );
 }

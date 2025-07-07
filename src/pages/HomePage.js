@@ -1,72 +1,96 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import Layout from "../components/Layout"; 
+import macbusLogo from "../assets/macbus-logo.PNG";  // <-- add this import
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white text-gray-800">
-      {/* Hero Section */}
-      <section className="bg-blue-100 py-10 px-4 text-center">
-        <img
-          src="/macbus-logo.jpg"
-          alt="MAC Bus Logo"
-          className="mx-auto mb-6 w-40 h-40 object-contain rounded-xl shadow-lg"
-        />
-        <h1 className="text-3xl font-bold mb-2">Mobile Access for Communities</h1>
-        <p className="text-lg mb-6">Providing safe, reliable transportation for families and communities.</p>
-        <div className="flex justify-center gap-4">
-          <Link to="/about">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition">
-              Learn More
-            </button>
-          </Link>
-          <Link to="/faq">
-            <button className="bg-gray-200 text-gray-800 px-6 py-2 rounded-xl hover:bg-gray-300 transition">
-              FAQ
-            </button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Mission Section */}
-      <section className="px-6 py-10 max-w-4xl mx-auto">
-        <h2 className="text-2xl font-semibold mb-4">Who We Are</h2>
-        <p>
-          The MAC Bus exists to bridge transportation gaps in our community, especially for families of incarcerated individuals. 
-          We aim to reconnect loved ones, reduce isolation, and provide equitable access to mobility.
-        </p>
-      </section>
-
-      {/* How It Works */}
-      <section className="bg-gray-100 py-10 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-semibold mb-6">How It Works</h2>
-          <div className="grid gap-6 sm:grid-cols-3">
-            <div className="p-4 bg-white rounded-xl shadow">
-              <h3 className="font-bold text-lg mb-2">1. Schedule</h3>
-              <p>Request a ride through our form or hotline.</p>
-            </div>
-            <div className="p-4 bg-white rounded-xl shadow">
-              <h3 className="font-bold text-lg mb-2">2. Ride</h3>
-              <p>Our licensed drivers pick you up and drop you off safely.</p>
-            </div>
-            <div className="p-4 bg-white rounded-xl shadow">
-              <h3 className="font-bold text-lg mb-2">3. Return</h3>
-              <p>We'll ensure you get back home reliably.</p>
-            </div>
+    <Layout>
+      <main className="min-h-screen bg-white text-gray-800">
+        {/* Hero Section */}
+        <section className="text-center py-16 px-6 bg-gradient-to-r from-purple-600 to-purple-400 text-white">
+          <img
+            src={macbusLogo}
+            alt="The MAC Bus Logo"
+            className="mx-auto w-40 md:w-56 mb-8 rounded-xl shadow-lg border-4 border-white"
+          />
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+            Welcome to The MAC Bus
+          </h1>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8 drop-shadow-md">
+            Equitable, accessible transportation serving our community — one ride at a time.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-6 max-w-sm mx-auto">
+            <Link
+              to="/how-to-ride"
+              className="bg-white text-purple-600 font-semibold px-8 py-3 rounded-full shadow hover:bg-gray-100 transition"
+            >
+              How to Ride
+            </Link>
+            <Link
+              to="/about"
+              className="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full shadow hover:bg-white hover:text-blue-600 transition"
+            >
+              About Us
+            </Link>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section className="py-10 px-6 text-center">
-        <h2 className="text-2xl font-semibold mb-4">Ready to ride?</h2>
-        <p className="mb-6">Contact us to schedule transportation or learn more about our service.</p>
-        <Link to="/contact">
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition">
-            Book a Ride
-          </button>
-        </Link>
-      </section>
-    </main>
+        {/* Who We Are Section */}
+        <section className="py-16 px-6 max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-6 text-purple-700">Who We Are</h2>
+
+          <p className="mb-4 text-gray-700 text-lg leading-relaxed">
+            <strong>Mississippi Access Connect Bus, Inc. (The MAC Bus)</strong> is a nonprofit transportation organization
+            dedicated to closing mobility gaps across Jackson County, Mississippi. Founded by a local veteran, woman, and
+            minority entrepreneur, The MAC Bus was created in response to a critical need for safe, reliable, and affordable
+            transit services — especially for seniors, workers, students, and underserved families.
+          </p>
+
+          <p className="mb-4 text-gray-700 text-lg leading-relaxed">
+            We’re more than a bus. We are a community-driven solution designed to improve quality of life, promote economic
+            opportunity, and connect people to the resources that matter most — jobs, healthcare, education, and one another.
+          </p>
+
+          <ul className="list-disc list-inside mb-4 text-gray-700 text-lg leading-relaxed">
+            <li>ADA-compliant and accessible to all</li>
+            <li>Rooted in community partnerships</li>
+            <li>Designed to serve rural and urban riders alike</li>
+            <li>Powered by a dual-entity model (nonprofit & for-profit) to ensure long-term sustainability</li>
+          </ul>
+
+          <p className="mb-4 text-gray-700 text-lg leading-relaxed">
+            Through innovative route planning, community feedback, and strategic collaboration with cities, sponsors, and local
+            stakeholders, The MAC Bus is ready to roll — launching free public service in <strong>August 2025</strong>.
+          </p>
+
+          <p className="italic text-purple-700 font-medium text-center text-lg">
+            Because everyone deserves a way to get where they’re going.
+          </p>
+
+          <div className="text-center">
+            <a
+              href="mailto:tmcfarlin@themacbus.org"
+              className="bg-purple-700 text-white px-6 py-3 rounded-xl hover:bg-purple-800 transition inline-block mt-6"
+            >
+              Contact Us for Early Access
+            </a>
+          </div>
+        </section>
+
+        {/* Call To Action Section */}
+        <section className="py-16 px-6 text-center bg-purple-600 text-white">
+          <h2 className="text-3xl font-bold mb-6">Ready to ride?</h2>
+          <p className="mb-8 max-w-2xl mx-auto text-lg">
+            Contact us to schedule transportation or learn more about our service.
+          </p>
+          <Link to="/book-ride">
+            <button className="bg-white text-purple-600 font-semibold px-10 py-4 rounded-full shadow hover:bg-gray-100 transition">
+              Book a Ride
+            </button>
+          </Link>
+        </section>
+      </main>
+    </Layout>
   );
 }

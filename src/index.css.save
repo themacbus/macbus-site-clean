@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: Global styles */
+body {
+  @apply bg-purple-50 text-gray-900;
+}
+
+
+
+xX
+X
+
+^X
+Exit
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: global styles */
+body {
+  @apply bg-purple-50 text-gray-900;
+}
