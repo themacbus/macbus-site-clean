@@ -35,22 +35,6 @@ export default function About() {
             </p>
           </section>
 
-          {/* Impact Stats */}
-          <section className="flex flex-col md:flex-row justify-around items-center gap-12 max-w-6xl mx-auto text-center">
-            <div className="bg-purple-600 bg-opacity-90 rounded-3xl p-10 shadow-xl flex-1">
-              <h3 className="text-5xl font-extrabold mb-2">500+</h3>
-              <p className="text-xl">Families Served</p>
-            </div>
-            <div className="bg-indigo-700 bg-opacity-90 rounded-3xl p-10 shadow-xl flex-1">
-              <h3 className="text-5xl font-extrabold mb-2">10,000+</h3>
-              <p className="text-xl">Safe Rides Provided</p>
-            </div>
-            <div className="bg-purple-800 bg-opacity-90 rounded-3xl p-10 shadow-xl flex-1">
-              <h3 className="text-5xl font-extrabold mb-2">25+</h3>
-              <p className="text-xl">Years of Service & Leadership</p>
-            </div>
-          </section>
-
           {/* Our Story */}
           <section className="max-w-5xl mx-auto space-y-8 text-lg leading-relaxed">
             <h2 className="text-4xl font-bold text-center mb-6 border-b-4 border-indigo-500 inline-block pb-2">

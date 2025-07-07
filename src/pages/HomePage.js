@@ -67,15 +67,6 @@ export default function HomePage() {
           <p className="italic text-purple-700 font-medium text-center text-lg">
             Because everyone deserves a way to get where they’re going.
           </p>
-
-          <div className="text-center">
-            <a
-              href="mailto:tmcfarlin@themacbus.org"
-              className="bg-purple-700 text-white px-6 py-3 rounded-xl hover:bg-purple-800 transition inline-block mt-6"
-            >
-              Contact Us for Early Access
-            </a>
-          </div>
         </section>
 
         {/* Call To Action Section */}
