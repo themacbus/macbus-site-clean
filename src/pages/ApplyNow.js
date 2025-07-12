@@ -6,7 +6,6 @@ export default function ApplyNow() {
     email: "",
     phone: "",
     job: "",
-    resume: null,
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -14,10 +13,10 @@ export default function ApplyNow() {
   const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: files ? files[0] : value,
+      [name]: value,
     }));
     setError("");
     setSuccess("");
@@ -27,31 +26,22 @@ export default function ApplyNow() {
     e.preventDefault();
     setSubmitting(true);
 
-    const body = new FormData();
-    for (let key in formData) {
-      body.append(key, formData[key]);
-    }
-
     try {
-const response = await fetch("hhttps://formspree.io/f/mzzvppzb", {
+      const response = await fetch("https://formspree.io/f/yourFormID", {
         method: "POST",
-        body,
         headers: {
-          Accept: "application/json",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      if (!response.ok) throw new Error("Error submitting form");
 
-      if (result.ok || response.status === 200) {
-        setSuccess("✅ Application submitted! We’ll be in touch.");
-        setFormData({ name: "", email: "", phone: "", job: "", resume: null });
-      } else {
-        throw new Error(result?.message || "Something went wrong");
-      }
+      setSuccess("Thanks for applying! We'll be in touch.");
+      setFormData({ name: "", email: "", phone: "", job: "" });
     } catch (err) {
       console.error(err);
-      setError("❌ There was an error submitting the form. Please try again later.");
+      setError("There was an error submitting the form. Please try again later.");
     } finally {
       setSubmitting(false);
     }
@@ -66,7 +56,7 @@ const response = await fetch("hhttps://formspree.io/f/mzzvppzb", {
       {error && <p className="text-red-600 mb-4">{error}</p>}
       {success && <p className="text-green-600 mb-4">{success}</p>}
 
-      <form onSubmit={handleSubmit} className="space-y-6" encType="multipart/form-data">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {[
           { label: "Name", name: "name", type: "text", placeholder: "Your full name" },
           { label: "Email", name: "email", type: "email", placeholder: "you@example.com" },
@@ -79,7 +69,7 @@ const response = await fetch("hhttps://formspree.io/f/mzzvppzb", {
               name={name}
               type={type}
               placeholder={placeholder}
-              value={formData[name] || ""}
+              value={formData[name]}
               onChange={handleChange}
               className="mt-1 w-full rounded border px-3 py-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600"
               disabled={submitting}
@@ -87,19 +77,6 @@ const response = await fetch("hhttps://formspree.io/f/mzzvppzb", {
             />
           </label>
         ))}
-
-        <label className="block">
-          <span className="text-gray-700 font-semibold">Resume (PDF or DOC)</span>
-          <input
-            name="resume"
-            type="file"
-            accept=".pdf,.doc,.docx"
-            onChange={handleChange}
-            className="mt-1 w-full"
-            disabled={submitting}
-            required
-          />
-        </label>
 
         <button
           type="submit"
