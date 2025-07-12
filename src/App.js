@@ -11,6 +11,7 @@ import BookRide from "./pages/BookRide";
 import Leadership from "./pages/Leadership";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
+import ApplyNow from "./pages/ApplyNow"; // 👈 import your new page
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/leadership" element={<Leadership />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/apply" element={<ApplyNow />} /> {/* 👈 add this */}
       </Routes>
     </Router>
   );
