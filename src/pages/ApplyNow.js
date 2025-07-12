@@ -33,18 +33,25 @@ export default function ApplyNow() {
     }
 
     try {
-      const response = await fetch("/api/submitApplication", {
+const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
         method: "POST",
         body,
+        headers: {
+          Accept: "application/json",
+        },
       });
 
-      if (!response.ok) throw new Error("Error submitting form");
+      const result = await response.json();
 
-      setSuccess("Thanks for applying! We'll be in touch.");
-      setFormData({ name: "", email: "", phone: "", job: "", resume: null });
+      if (result.ok || response.status === 200) {
+        setSuccess("✅ Application submitted! We’ll be in touch.");
+        setFormData({ name: "", email: "", phone: "", job: "", resume: null });
+      } else {
+        throw new Error(result?.message || "Something went wrong");
+      }
     } catch (err) {
       console.error(err);
-      setError("There was an error submitting the form. Please try again later.");
+      setError("❌ There was an error submitting the form. Please try again later.");
     } finally {
       setSubmitting(false);
     }
@@ -76,6 +83,7 @@ export default function ApplyNow() {
               onChange={handleChange}
               className="mt-1 w-full rounded border px-3 py-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600"
               disabled={submitting}
+              required
             />
           </label>
         ))}
@@ -89,6 +97,7 @@ export default function ApplyNow() {
             onChange={handleChange}
             className="mt-1 w-full"
             disabled={submitting}
+            required
           />
         </label>
 
