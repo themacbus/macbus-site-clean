@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ← add this line
+import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 
 const jobs = [
@@ -32,8 +32,7 @@ export default function NowHiring() {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   function validate() {
     const newErrors = {};
@@ -53,60 +52,67 @@ export default function NowHiring() {
     setErrors((prev) => ({ ...prev, [name]: undefined }));
 
     if (name === "resume") {
-      setFormData((prev) => ({ ...prev, resume: files[0] || null }));
+      const file = files[0];
+      if (file && file.size > 5 * 1024 * 1024) {
+        setErrors((prev) => ({
+          ...prev,
+          resume: "File size must be less than 5MB.",
+        }));
+        setFormData((prev) => ({ ...prev, resume: null }));
+      } else {
+        setFormData((prev) => ({ ...prev, resume: file || null }));
+      }
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   }
 
   async function handleSubmit(e) {
-  e.preventDefault();
-  const validationErrors = validate();
-  if (Object.keys(validationErrors).length > 0) {
-    setErrors(validationErrors);
-    setSubmitted(false);
-    return;
-  }
-
-  setErrors({});
-  setSubmitting(true);
-
-  try {
-    const formPayload = new FormData();
-    formPayload.append("name", formData.name);
-    formPayload.append("email", formData.email);
-    formPayload.append("phone", formData.phone);
-    formPayload.append("job", formData.job);
-    formPayload.append("resume", formData.resume); // 📎 Include file
-
-    const response = await fetch("/api/submitApplication", {
-      method: "POST",
-      body: formPayload,
-    });
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setSubmitted(false);
+      return;
     }
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      job: "",
-      resume: null,
-    });
+    setErrors({});
+    setSubmitting(true);
 
-    setSubmitted(true);
-    navigate("/thank-you");
-  } catch (error) {
-    console.error("Submission error:", error);
-    alert("There was an error submitting the form. Please try again later.");
-  } finally {
-    setSubmitting(false);
+    try {
+      const formPayload = new FormData();
+      formPayload.append("name", formData.name);
+      formPayload.append("email", formData.email);
+      formPayload.append("phone", formData.phone);
+      formPayload.append("job", formData.job);
+      formPayload.append("resume", formData.resume);
+
+      const response = await fetch("/api/submitApplication", {
+        method: "POST",
+        body: formPayload,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        job: "",
+        resume: null,
+      });
+
+      setSubmitted(true);
+      navigate("/thank-you");
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("There was an error submitting the form. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
   }
-}
-
 
   return (
     <Layout>
@@ -303,7 +309,10 @@ export default function NowHiring() {
               />
               {formData.resume && (
                 <p className="mt-2 text-gray-700 text-sm italic">
-                  Selected file: {formData.resume.name}
+                  Selected file: {formData.resume.name}{" "}
+                  {formData.resume.size
+                    ? `(${(formData.resume.size / 1024).toFixed(1)} KB)`
+                    : ""}
                 </p>
               )}
               {errors.resume && (

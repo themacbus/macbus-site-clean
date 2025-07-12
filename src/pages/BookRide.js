@@ -1,4 +1,3 @@
-// src/pages/BookRide.js
 import React, { useState } from "react";
 
 export default function BookRide() {
@@ -13,20 +12,22 @@ export default function BookRide() {
   });
 
   const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
-    setErrors(prev => ({ ...prev, [e.target.name]: "" })); // Clear error on change
+    setErrors((prev) => ({ ...prev, [e.target.name]: "" })); // Clear error on change
   };
 
   const validate = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Name is required.";
     if (!formData.email.trim()) newErrors.email = "Email is required.";
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid.";
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Email is invalid.";
     if (!formData.phone.trim()) newErrors.phone = "Phone is required.";
     if (!formData.pickup.trim()) newErrors.pickup = "Pickup location is required.";
     if (!formData.dropoff.trim()) newErrors.dropoff = "Dropoff location is required.";
@@ -35,29 +36,46 @@ export default function BookRide() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    console.log("Booking info submitted:", formData);
-    alert("Thanks for booking! We will contact you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      pickup: "",
-      dropoff: "",
-      date: "",
-      time: "",
-    });
+    setSubmitting(true);
+    try {
+     const response = await fetch("/api/bookRide", {
+
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
+
+      if (!response.ok) throw new Error("Failed to submit booking");
+      alert("Thanks for booking! We will contact you soon.");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        pickup: "",
+        dropoff: "",
+        date: "",
+        time: "",
+      });
+    } catch (error) {
+      alert("Error submitting booking, please try again.");
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow rounded mt-12">
-      <h1 className="text-3xl font-bold mb-8 text-center text-purple-700">Book a Ride</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center text-purple-700">
+        Book a Ride
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         {[
           { label: "Name", name: "name", type: "text", placeholder: "Your full name" },
@@ -79,6 +97,7 @@ export default function BookRide() {
               className={`mt-1 w-full rounded border px-3 py-2 
                 ${errors[name] ? "border-red-500" : "border-gray-300"} 
                 focus:outline-none focus:ring-2 focus:ring-purple-600`}
+              disabled={submitting}
             />
             {errors[name] && (
               <p className="text-red-600 text-sm mt-1">{errors[name]}</p>
@@ -88,9 +107,11 @@ export default function BookRide() {
 
         <button
           type="submit"
-          className="w-full bg-purple-600 text-white py-3 rounded font-semibold hover:bg-purple-700 transition"
+          disabled={submitting}
+          className={`w-full bg-purple-600 text-white py-3 rounded font-semibold transition
+            ${submitting ? "opacity-50 cursor-not-allowed" : "hover:bg-purple-700"}`}
         >
-          Submit Booking
+          {submitting ? "Submitting..." : "Submit Booking"}
         </button>
       </form>
     </div>

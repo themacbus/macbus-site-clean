@@ -69,6 +69,33 @@ export default function HomePage() {
           </p>
         </section>
 
+{/* MAC Bus Expansion CTA */}
+<section className="bg-purple-100 text-center py-16 px-6 mt-12 rounded-lg shadow-md max-w-5xl mx-auto">
+  <h2 className="text-3xl md:text-4xl font-bold text-purple-800 mb-4">
+    We’re Building More Than a Bus System
+  </h2>
+  <p className="text-lg text-gray-700 mb-6">
+    Visit{" "}
+    <a
+      href="https://themacbus.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-purple-700 font-semibold underline hover:text-purple-900 transition"
+    >
+      TheMACBus.com
+    </a>{" "}
+    to explore routes, invest in community growth, and see what’s next.
+  </p>
+  <a
+    href="https://themacbus.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-block bg-purple-700 text-white text-lg font-semibold py-3 px-6 rounded-lg hover:bg-purple-800 transition"
+  >
+    Go to TheMACBus.com
+  </a>
+</section>
+
         {/* Call To Action Section */}
         <section className="py-16 px-6 text-center bg-purple-600 text-white">
           <h2 className="text-3xl font-bold mb-6">Ready to ride?</h2>
