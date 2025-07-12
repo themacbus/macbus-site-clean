@@ -33,7 +33,7 @@ export default function ApplyNow() {
     }
 
     try {
-const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+const response = await fetch("hhttps://formspree.io/f/mzzvppzb", {
         method: "POST",
         body,
         headers: {
