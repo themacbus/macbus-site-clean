@@ -25,10 +25,10 @@ export default function ThankYou() {
             We've received your application and will be in touch if you’re a match.
             In the meantime, please send your resume to{" "}
             <a
-              href="mailto:info@themacbus.org"
+              href="mailto:tmac@themacbus.com"
               className="text-purple-600 underline font-medium"
             >
-              info@themacbus.org
+              tmac@themacbus.com
             </a>
             .
           </p>

@@ -95,7 +95,7 @@ export default function NowHiring() {
           We're Hiring!
         </h1>
 
-        <p className="text-lg max-w-3xl mx-auto mb-12 text-center text-gray-700 leading-relaxed">
+        <p className="text-lg max-w-3xl mx-auto mb-12 text-gray-700 leading-relaxed text-center">
           Join The MAC Bus team and make a real difference in your community.
           We're looking for passionate individuals dedicated to equity, safety,
           and service.
@@ -248,7 +248,7 @@ export default function NowHiring() {
               href="mailto:tmac@themacbus.com"
               className="text-purple-600 underline font-medium"
             >
-              info@themacbus.org
+              tmac@themacbus.com
             </a>
             .
           </p>
