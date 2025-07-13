@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
 import Layout from "../components/Layout";
 
 const jobs = [
@@ -26,13 +26,11 @@ export default function NowHiring() {
     email: "",
     phone: "",
     job: "",
-    resume: null,
   });
 
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ Initialize navigate
 
   function validate() {
     const newErrors = {};
@@ -43,28 +41,13 @@ export default function NowHiring() {
     )
       newErrors.email = "Invalid email address.";
     if (!formData.job) newErrors.job = "Please select a position.";
-    if (!formData.resume) newErrors.resume = "Please upload your resume.";
     return newErrors;
   }
 
   function handleChange(e) {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
     setErrors((prev) => ({ ...prev, [name]: undefined }));
-
-    if (name === "resume") {
-      const file = files[0];
-      if (file && file.size > 5 * 1024 * 1024) {
-        setErrors((prev) => ({
-          ...prev,
-          resume: "File size must be less than 5MB.",
-        }));
-        setFormData((prev) => ({ ...prev, resume: null }));
-      } else {
-        setFormData((prev) => ({ ...prev, resume: file || null }));
-      }
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   async function handleSubmit(e) {
@@ -72,43 +55,34 @@ export default function NowHiring() {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      setSubmitted(false);
       return;
     }
 
     setErrors({});
     setSubmitting(true);
 
-    try {
-      const formPayload = new FormData();
-      formPayload.append("name", formData.name);
-      formPayload.append("email", formData.email);
-      formPayload.append("phone", formData.phone);
-      formPayload.append("job", formData.job);
-      formPayload.append("resume", formData.resume);
+    const formPayload = new FormData();
+    formPayload.append("name", formData.name);
+    formPayload.append("email", formData.email);
+    formPayload.append("phone", formData.phone);
+    formPayload.append("job", formData.job);
 
-      const response = await fetch("/api/submitApplication", {
+    try {
+      const response = await fetch("https://formspree.io/f/mzzvppzb", {
         method: "POST",
         body: formPayload,
+        headers: {
+          Accept: "application/json",
+        },
       });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      if (!response.ok) throw new Error("Form submission failed");
 
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        job: "",
-        resume: null,
-      });
-
-      setSubmitted(true);
-      navigate("/thank-you");
+      setFormData({ name: "", email: "", phone: "", job: "" });
+      navigate("/thank-you"); // ✅ Redirect after submit
     } catch (error) {
-      console.error("Submission error:", error);
       alert("There was an error submitting the form. Please try again later.");
+      console.error("Submission error:", error);
     } finally {
       setSubmitting(false);
     }
@@ -122,8 +96,9 @@ export default function NowHiring() {
         </h1>
 
         <p className="text-lg max-w-3xl mx-auto mb-12 text-center text-gray-700 leading-relaxed">
-          Join The MAC Bus team and make a real difference in your community. We're
-          looking for passionate individuals dedicated to equity, safety, and service.
+          Join The MAC Bus team and make a real difference in your community.
+          We're looking for passionate individuals dedicated to equity, safety,
+          and service.
         </p>
 
         <section className="space-y-8 mb-16">
@@ -143,15 +118,6 @@ export default function NowHiring() {
             Apply Now
           </h2>
 
-          {submitted && (
-            <p
-              role="alert"
-              className="text-green-600 text-center mb-6 font-semibold animate-fadeIn"
-            >
-              Thank you for your application! We will be in touch soon.
-            </p>
-          )}
-
           <form
             onSubmit={handleSubmit}
             className="max-w-xl mx-auto space-y-6 bg-purple-50 p-8 rounded-xl shadow-md"
@@ -168,12 +134,11 @@ export default function NowHiring() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`mt-1 block w-full rounded border px-3 py-2
-                  ${
-                    errors.name
-                      ? "border-red-500 focus:border-red-600"
-                      : "border-gray-300 focus:border-purple-500"
-                  } focus:outline-none focus:ring-1 ${
+                className={`mt-1 block w-full rounded border px-3 py-2 ${
+                  errors.name
+                    ? "border-red-500 focus:border-red-600"
+                    : "border-gray-300 focus:border-purple-500"
+                } focus:outline-none focus:ring-1 ${
                   errors.name ? "focus:ring-red-500" : "focus:ring-purple-400"
                 }`}
                 aria-invalid={errors.name ? "true" : "false"}
@@ -188,10 +153,7 @@ export default function NowHiring() {
             </div>
 
             <div>
-              <label
-                htmlFor="email"
-                className="block font-semibold text-gray-700 mb-1"
-              >
+              <label htmlFor="email" className="block font-semibold text-gray-700 mb-1">
                 Email Address <span className="text-red-600">*</span>
               </label>
               <input
@@ -200,12 +162,11 @@ export default function NowHiring() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`mt-1 block w-full rounded border px-3 py-2
-                  ${
-                    errors.email
-                      ? "border-red-500 focus:border-red-600"
-                      : "border-gray-300 focus:border-purple-500"
-                  } focus:outline-none focus:ring-1 ${
+                className={`mt-1 block w-full rounded border px-3 py-2 ${
+                  errors.email
+                    ? "border-red-500 focus:border-red-600"
+                    : "border-gray-300 focus:border-purple-500"
+                } focus:outline-none focus:ring-1 ${
                   errors.email ? "focus:ring-red-500" : "focus:ring-purple-400"
                 }`}
                 aria-invalid={errors.email ? "true" : "false"}
@@ -220,10 +181,7 @@ export default function NowHiring() {
             </div>
 
             <div>
-              <label
-                htmlFor="phone"
-                className="block font-semibold text-gray-700 mb-1"
-              >
+              <label htmlFor="phone" className="block font-semibold text-gray-700 mb-1">
                 Phone Number
               </label>
               <input
@@ -233,22 +191,12 @@ export default function NowHiring() {
                 value={formData.phone}
                 onChange={handleChange}
                 className="mt-1 block w-full rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-purple-400 focus:border-purple-500"
-                aria-describedby="phone-help"
                 placeholder="Optional"
               />
-              <p
-                id="phone-help"
-                className="text-gray-500 mt-1 text-sm select-none"
-              >
-                We'll only contact you if necessary.
-              </p>
             </div>
 
             <div>
-              <label
-                htmlFor="job"
-                className="block font-semibold text-gray-700 mb-1"
-              >
+              <label htmlFor="job" className="block font-semibold text-gray-700 mb-1">
                 Position Applying For <span className="text-red-600">*</span>
               </label>
               <select
@@ -256,12 +204,11 @@ export default function NowHiring() {
                 name="job"
                 value={formData.job}
                 onChange={handleChange}
-                className={`mt-1 block w-full rounded border px-3 py-2
-                  ${
-                    errors.job
-                      ? "border-red-500 focus:border-red-600"
-                      : "border-gray-300 focus:border-purple-500"
-                  } focus:outline-none focus:ring-1 ${
+                className={`mt-1 block w-full rounded border px-3 py-2 ${
+                  errors.job
+                    ? "border-red-500 focus:border-red-600"
+                    : "border-gray-300 focus:border-purple-500"
+                } focus:outline-none focus:ring-1 ${
                   errors.job ? "focus:ring-red-500" : "focus:ring-purple-400"
                 }`}
                 aria-invalid={errors.job ? "true" : "false"}
@@ -282,62 +229,31 @@ export default function NowHiring() {
               )}
             </div>
 
-            <div>
-              <label
-                htmlFor="resume"
-                className="block font-semibold text-gray-700 mb-1"
-              >
-                Upload Resume (PDF) <span className="text-red-600">*</span>
-              </label>
-              <input
-                id="resume"
-                type="file"
-                name="resume"
-                accept="application/pdf"
-                onChange={handleChange}
-                className={`mt-1 block w-full rounded border px-3 py-2
-                  ${
-                    errors.resume
-                      ? "border-red-500 focus:border-red-600"
-                      : "border-gray-300 focus:border-purple-500"
-                  } focus:outline-none focus:ring-1 ${
-                  errors.resume ? "focus:ring-red-500" : "focus:ring-purple-400"
-                }`}
-                aria-invalid={errors.resume ? "true" : "false"}
-                aria-describedby={errors.resume ? "resume-error" : undefined}
-                required
-              />
-              {formData.resume && (
-                <p className="mt-2 text-gray-700 text-sm italic">
-                  Selected file: {formData.resume.name}{" "}
-                  {formData.resume.size
-                    ? `(${(formData.resume.size / 1024).toFixed(1)} KB)`
-                    : ""}
-                </p>
-              )}
-              {errors.resume && (
-                <p id="resume-error" className="text-red-600 mt-1 text-sm">
-                  {errors.resume}
-                </p>
-              )}
-            </div>
-
             <button
               type="submit"
               disabled={submitting}
-              className={`w-full py-3 rounded-xl font-semibold text-white transition
-                ${
-                  submitting
-                    ? "bg-purple-400 cursor-not-allowed"
-                    : "bg-purple-600 hover:bg-purple-700"
-                }`}
+              className={`w-full py-3 rounded-xl font-semibold text-white transition ${
+                submitting
+                  ? "bg-purple-400 cursor-not-allowed"
+                  : "bg-purple-600 hover:bg-purple-700"
+              }`}
             >
               {submitting ? "Submitting..." : "Submit Application"}
             </button>
           </form>
+
+          <p className="text-center text-sm text-gray-600 mt-4">
+            After submitting, please email your resume to{" "}
+            <a
+              href="mailto:tmac@themacbus.com"
+              className="text-purple-600 underline font-medium"
+            >
+              info@themacbus.org
+            </a>
+            .
+          </p>
         </section>
 
-        {/* Tailwind fade-in animation */}
         <style>{`
           @keyframes fadeIn {
             from {opacity: 0;}

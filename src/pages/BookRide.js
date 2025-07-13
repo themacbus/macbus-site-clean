@@ -37,39 +37,45 @@ export default function BookRide() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-    setSubmitting(true);
-    try {
-     const response = await fetch("/api/bookRide", {
+  e.preventDefault();
+  const validationErrors = validate();
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    return;
+  }
 
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(formData),
-});
+  setSubmitting(true);
+  try {
+    const response = await fetch("https://formspree.io/f/mzzvppzb", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-      if (!response.ok) throw new Error("Failed to submit booking");
-      alert("Thanks for booking! We will contact you soon.");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        pickup: "",
-        dropoff: "",
-        date: "",
-        time: "",
-      });
-    } catch (error) {
-      alert("Error submitting booking, please try again.");
-      console.error(error);
-    } finally {
-      setSubmitting(false);
-    }
-  };
+    const data = await response.json();
+    if (data.ok !== true && !response.ok) throw new Error("Submission failed");
+
+    alert("Thanks for booking! We will contact you soon.");
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      pickup: "",
+      dropoff: "",
+      date: "",
+      time: "",
+    });
+  } catch (error) {
+    console.error(error);
+    alert("Error submitting booking. Please try again.");
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow rounded mt-12">
