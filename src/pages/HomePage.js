@@ -75,25 +75,26 @@ export default function HomePage() {
     We’re Building More Than a Bus System
   </h2>
   <p className="text-lg text-gray-700 mb-6">
-    Visit{" "}
-    <a
-      href="https://themacbus.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-purple-700 font-semibold underline hover:text-purple-900 transition"
-    >
-      TheMACBus.com
-    </a>{" "}
-    to explore routes, invest in community growth, and see what’s next.
-  </p>
+  Visit{" "}
   <a
     href="https://themacbus.com"
     target="_blank"
     rel="noopener noreferrer"
-    className="inline-block bg-purple-700 text-white text-lg font-semibold py-3 px-6 rounded-lg hover:bg-purple-800 transition"
+    className="text-purple-700 font-semibold underline hover:text-purple-900 transition"
   >
-    Go to TheMACBus.com
-  </a>
+    The Transporter
+  </a>{" "}
+  to explore routes, invest in community growth, and see what’s next.
+</p>
+
+<a
+  href="https://themacbus.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block bg-purple-700 text-white text-lg font-semibold py-3 px-6 rounded-lg hover:bg-purple-800 transition"
+>
+  Visit The Transporter
+</a>
 </section>
 
         {/* Call To Action Section */}
