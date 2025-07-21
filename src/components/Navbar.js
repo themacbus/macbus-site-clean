@@ -11,26 +11,34 @@ export default function Navbar() {
     { to: "/", label: "Home", exact: true },
     { to: "/about", label: "About" },
     { to: "/programs", label: "Programs" },
-    { to: "/how-to-ride", label: "How to Ride", tag: "Coming Soon" },
+    {
+      external: true,
+      href: "https://themacbus.com/pricing",
+      label: "How to Ride",
+    },
     { to: "/sponsor", label: "Sponsor" },
     { to: "/leadership", label: "Leadership" },
-    { to: "/pricing", label: "Pricing", tag: "Coming Soon" },
+    {
+      external: true,
+      href: "https://themacbus.com/pricing",
+      label: "Pricing",
+    },
     { to: "/now-hiring", label: "Now Hiring" },
   ];
 
   const externalLinks = [
     {
       href: "https://themacbus.com/routes",
-      label: "View Routes"
+      label: "View Routes",
     },
     {
       href: "https://themacbus.com/invest",
-      label: "Invest in Mobility"
+      label: "Invest in Mobility",
     },
     {
       href: "https://themacbus.com/community",
-      label: "Our Future"
-    }
+      label: "Our Future",
+    },
   ];
 
   return (
@@ -53,23 +61,29 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex space-x-6 items-center">
-          {navLinks.map(({ to, label, tag }) => (
-            <div key={to} className="relative">
-              <NavLink
-                to={to}
-                end={to === "/"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "underline font-semibold"
-                    : "hover:underline transition"
-                }
-              >
-                {label}
-              </NavLink>
-              {tag && (
-                <span className="absolute -top-3 -right-14 bg-yellow-200 text-purple-800 text-[10px] px-2 py-0.5 rounded-full font-bold shadow-sm animate-pulse">
-                  🚧 {tag}
-                </span>
+          {navLinks.map(({ to, href, label, external }) => (
+            <div key={label} className="relative">
+              {external ? (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline transition"
+                >
+                  {label}
+                </a>
+              ) : (
+                <NavLink
+                  to={to}
+                  end={to === "/"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "underline font-semibold"
+                      : "hover:underline transition"
+                  }
+                >
+                  {label}
+                </NavLink>
               )}
             </div>
           ))}
@@ -103,26 +117,33 @@ export default function Navbar() {
           isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
-        {navLinks.map(({ to, label, tag }) => (
-          <div key={to} className="relative">
-            <NavLink
-              to={to}
-              end={to === "/"}
-              onClick={closeMenu}
-              className={({ isActive }) =>
-                `block py-2 px-4 rounded ${
-                  isActive
-                    ? "bg-purple-800 font-semibold"
-                    : "hover:bg-purple-700 transition"
-                }`
-              }
-            >
-              {label}
-            </NavLink>
-            {tag && (
-              <span className="absolute top-2 right-4 bg-yellow-200 text-purple-800 text-[10px] px-2 py-0.5 rounded-full font-bold shadow-sm animate-pulse">
-                🚧 {tag}
-              </span>
+        {navLinks.map(({ to, href, label, external }) => (
+          <div key={label} className="relative">
+            {external ? (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="block py-2 px-4 rounded hover:bg-purple-700 transition"
+              >
+                {label}
+              </a>
+            ) : (
+              <NavLink
+                to={to}
+                end={to === "/"}
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  `block py-2 px-4 rounded ${
+                    isActive
+                      ? "bg-purple-800 font-semibold"
+                      : "hover:bg-purple-700 transition"
+                  }`
+                }
+              >
+                {label}
+              </NavLink>
             )}
           </div>
         ))}
