@@ -31,10 +31,7 @@ export default function Navbar() {
       href: "https://themacbus.com/routes",
       label: "View Routes",
     },
-    {
-      href: "https://themacbus.com/invest",
-      label: "Invest in Mobility",
-    },
+    
     {
       href: "https://themacbus.com/community",
       label: "Our Future",

@@ -12,6 +12,19 @@ export default function Contact() {
           Have a question or want to schedule a ride? We’d love to hear from you.
         </p>
 
+        {/* Contact Info Section */}
+        <div className="mb-10 text-center">
+          <p className="text-lg font-semibold text-gray-800">Tawanna McFarlin</p>
+          <p className="text-gray-700">Executive Director</p>
+          <p className="text-gray-700">📞 228-424-1394</p>
+          <p className="text-purple-600">
+            <a href="mailto:tmcfarlin@themacbus.org" className="hover:underline">
+              tmcfarlin@themacbus.org
+            </a>
+          </p>
+        </div>
+
+        {/* Contact Form */}
         <form className="space-y-6">
           <div>
             <label className="block font-semibold mb-2" htmlFor="name">
