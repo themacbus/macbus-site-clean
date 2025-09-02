@@ -20,8 +20,9 @@ export default function Navbar() {
     { to: "/leadership", label: "Leadership" },
     {
       external: true,
-      href: "https://themacbus.com/pricing",
-      label: "Pricing",
+href: "https://themacbus.com/shuttle-pricing",
+label: "Pricing",
+
     },
     { to: "/now-hiring", label: "Now Hiring" },
   ];
