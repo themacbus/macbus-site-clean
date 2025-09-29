@@ -77,7 +77,7 @@ export default function HomePage() {
 
           <p className="mb-4 text-gray-700 text-lg leading-relaxed">
             Through innovative route planning, community feedback, and strategic collaboration with cities, sponsors, and local
-            stakeholders, The MAC Bus is ready to roll — launching free public service in <strong>August 2025</strong>.
+            stakeholders, The MAC Bus is ready to roll 
           </p>
 
           <p className="italic text-purple-700 font-medium text-center text-lg">

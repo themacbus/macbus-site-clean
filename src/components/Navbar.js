@@ -13,17 +13,11 @@ export default function Navbar() {
     { to: "/programs", label: "Programs" },
     {
       external: true,
-      href: "https://themacbus.com/pricing",
+      href: "https://www.themacbus.com/ride",
       label: "How to Ride",
     },
     { to: "/sponsor", label: "Sponsor" },
     { to: "/leadership", label: "Leadership" },
-    {
-      external: true,
-href: "https://themacbus.com/shuttle-pricing",
-label: "Pricing",
-
-    },
     { to: "/now-hiring", label: "Now Hiring" },
   ];
 
@@ -32,10 +26,13 @@ label: "Pricing",
       href: "https://themacbus.com/routes",
       label: "View Routes",
     },
-    
     {
       href: "https://themacbus.com/community",
       label: "Our Future",
+    },
+    {
+      href: "https://themacbus.com/shuttle-pricing",
+      label: "Pricing",
     },
   ];
 
