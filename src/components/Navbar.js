@@ -13,7 +13,7 @@ export default function Navbar() {
     { to: "/programs", label: "Programs" },
     {
       external: true,
-      href: "https://www.themacbus.com/ride",
+      href: "https://pci.jotform.com/form/252710672217049", // ✅ Updated JotForm link
       label: "How to Ride",
     },
     { to: "/sponsor", label: "Sponsor" },
