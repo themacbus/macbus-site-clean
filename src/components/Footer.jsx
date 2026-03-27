@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Heart } from "lucide-react"; // Matching your icon style
-
+import { Mail, MapPin, Heart } from "lucide-react";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
