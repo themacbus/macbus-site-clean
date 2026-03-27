@@ -1,13 +1,18 @@
 import React from "react";
-import Navbar from "./Navbar";  // ✅ This line imports the Navbar component
-import Footer from "./Footer";  // ✅ Footer should also be in the same folder
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export default function Layout({ children }) {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main>{children}</main>
+      {/* The 'flex-grow' ensures the footer stays at the bottom even on short pages.
+        The 'pt-0' (or 'pt-16' if your navbar overlaps content) handles the spacing.
+      */}
+      <main className="flex-grow">
+        {children}
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }
