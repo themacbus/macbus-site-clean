@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ClipboardCheck, Bus, Users, Globe, ArrowRight, Heart, Handshake, Landmark } from "lucide-react";
+import { ClipboardCheck, Bus, Handshake, Landmark } from "lucide-react";
 import Layout from "../components/Layout"; 
 import macbusLogo from "../assets/macbus-logo.PNG";
 

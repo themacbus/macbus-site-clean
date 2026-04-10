@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
-import { ArrowRight, Plane, Bus, MapPin } from "lucide-react";
+import { Plane, Bus, MapPin } from "lucide-react";
 
 export default function Pricing() {
   return (
