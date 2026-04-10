@@ -7,21 +7,22 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(prev => !prev);
   const closeMenu = () => setIsOpen(false);
 
-  // UPDATED: All links now point to internal routes
+  const jotformUrl = "https://pci.jotform.com/form/252710672217049";
+
+  // Mixed internal and external links
   const navLinks = [
     { to: "/", label: "Home", exact: true },
     { to: "/about", label: "About" },
     { to: "/programs", label: "Programs" },
-    { to: "/how-to-ride", label: "How to Ride" }, // Changed to internal
+    { href: jotformUrl, label: "How to Ride", external: true }, // FIXED: External Jotform
     { to: "/sponsor", label: "Sponsor" },
     { to: "/leadership", label: "Leadership" },
     { to: "/now-hiring", label: "Now Hiring" },
   ];
 
-  // UPDATED: Removed external URLs, pointing to internal pages
   const serviceLinks = [
-    { to: "/how-to-ride", label: "View Routes" }, 
-    { to: "/", label: "Our Future" }, // Points to the 'Something Bigger' section on Home
+    { href: jotformUrl, label: "View Routes", external: true }, // FIXED: Pointed to Form/Routes
+    { to: "/", label: "Our Future" },
     { to: "/pricing", label: "Pricing" },
   ];
 
@@ -43,19 +44,31 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex space-x-1 items-center">
-          {navLinks.map(({ to, label }) => (
-            <NavLink
-              key={label}
-              to={to}
-              end={to === "/"}
-              className={({ isActive }) =>
-                `px-3 py-2 rounded-md text-sm font-medium transition ${
-                  isActive ? "bg-purple-800 shadow-inner" : "hover:bg-purple-600"
-                }`
-              }
-            >
-              {label}
-            </NavLink>
+          {navLinks.map((link) => (
+            link.external ? (
+              <a 
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-2 rounded-md text-sm font-medium hover:bg-purple-600 transition"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <NavLink
+                key={link.label}
+                to={link.to}
+                end={link.to === "/"}
+                className={({ isActive }) =>
+                  `px-3 py-2 rounded-md text-sm font-medium transition ${
+                    isActive ? "bg-purple-800 shadow-inner" : "hover:bg-purple-600"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            )
           ))}
 
           {/* Desktop Dropdown */}
@@ -66,15 +79,26 @@ export default function Navbar() {
             
             <div className="absolute left-0 pt-2 w-48 hidden group-hover:block transition-all">
               <ul className="bg-white text-purple-900 rounded-lg shadow-xl py-2 border border-purple-100">
-                {serviceLinks.map(({ to, label }) => (
-                  <li key={label}>
-                    <Link
-                      to={to}
-                      onClick={closeMenu}
-                      className="block px-4 py-2 text-sm hover:bg-purple-50 hover:text-purple-700 transition"
-                    >
-                      {label}
-                    </Link>
+                {serviceLinks.map((link) => (
+                  <li key={link.label}>
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2 text-sm hover:bg-purple-50 hover:text-purple-700 transition"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.to}
+                        onClick={closeMenu}
+                        className="block px-4 py-2 text-sm hover:bg-purple-50 hover:text-purple-700 transition"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -90,34 +114,60 @@ export default function Navbar() {
         }`}
       >
         <div className="p-4 space-y-1">
-          {navLinks.map(({ to, label }) => (
-            <NavLink
-              key={label}
-              to={to}
-              end={to === "/"}
-              onClick={closeMenu}
-              className={({ isActive }) =>
-                `block py-3 px-4 rounded-lg transition ${
-                  isActive ? "bg-purple-900 font-bold" : "hover:bg-purple-600"
-                }`
-              }
-            >
-              {label}
-            </NavLink>
+          {navLinks.map((link) => (
+            link.external ? (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="block py-3 px-4 rounded-lg hover:bg-purple-600 transition"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <NavLink
+                key={link.label}
+                to={link.to}
+                end={link.to === "/"}
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  `block py-3 px-4 rounded-lg transition ${
+                    isActive ? "bg-purple-900 font-bold" : "hover:bg-purple-600"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            )
           ))}
 
           {/* Mobile Services Section */}
           <div className="mt-4 pt-4 border-t border-purple-500/50">
             <p className="px-4 text-xs font-uppercase tracking-widest text-purple-300 mb-2 font-bold">SERVICES</p>
-            {serviceLinks.map(({ to, label }) => (
-              <Link
-                key={label}
-                to={to}
-                onClick={closeMenu}
-                className="block py-3 px-4 rounded-lg text-purple-100 hover:bg-purple-600 transition"
-              >
-                {label}
-              </Link>
+            {serviceLinks.map((link) => (
+              link.external ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMenu}
+                  className="block py-3 px-4 rounded-lg text-purple-100 hover:bg-purple-600 transition"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.to}
+                  onClick={closeMenu}
+                  className="block py-3 px-4 rounded-lg text-purple-100 hover:bg-purple-600 transition"
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </div>
         </div>

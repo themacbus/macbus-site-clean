@@ -5,6 +5,8 @@ import Layout from "../components/Layout";
 import macbusLogo from "../assets/macbus-logo.PNG";
 
 export default function HomePage() {
+  const jotformUrl = "https://pci.jotform.com/form/252710672217049";
+
   return (
     <Layout>
       <main className="min-h-screen bg-slate-50 text-gray-800">
@@ -43,15 +45,20 @@ export default function HomePage() {
               Connecting People to <span className="text-purple-200">Opportunity</span>
             </h1>
             
-            {/* NEW MISSION STATEMENT */}
             <p className="text-lg md:text-2xl max-w-3xl mx-auto mb-10 text-purple-50 font-light leading-relaxed">
               Mississippi Access Connect Bus, Inc. is committed to providing reliable, affordable, and accessible transportation that connects people to opportunity, supports workforce mobility, and strengthens communities.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
-              <Link to="/book-ride" className="bg-white text-purple-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:scale-105 transition-all text-lg">
+              {/* FIXED: Pointed to Jotform */}
+              <a 
+                href={jotformUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-purple-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:scale-105 transition-all text-lg flex items-center justify-center"
+              >
                 Request a Ride
-              </Link>
+              </a>
               <Link to="/sponsor" className="bg-green-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-green-500 transition-all text-lg">
                 Donate Now
               </Link>
@@ -74,7 +81,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Services At a Glance - 10 Second Scan */}
+        {/* Services At a Glance */}
         <section className="py-20 px-6 max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Our Services</h2>
@@ -96,7 +103,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* NEW: Strategic Partners Section */}
+        {/* Strategic Partners Section */}
         <section className="py-16 bg-slate-100 px-6">
           <div className="max-w-5xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-500 uppercase tracking-widest mb-10">Community & Strategic Partners</h2>
@@ -135,9 +142,15 @@ export default function HomePage() {
           <p className="mb-10 max-w-xl mx-auto text-gray-600 text-lg">
             Experience the future of community transit today.
           </p>
-          <Link to="/book-ride" className="inline-block bg-purple-700 text-white font-bold px-12 py-5 rounded-full shadow-xl hover:bg-purple-800 transition-all text-lg">
+          {/* FIXED: Pointed to Jotform */}
+          <a 
+            href={jotformUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-purple-700 text-white font-bold px-12 py-5 rounded-full shadow-xl hover:bg-purple-800 transition-all text-lg"
+          >
              Request a Ride Now
-          </Link>
+          </a>
         </section>
       </main>
     </Layout>

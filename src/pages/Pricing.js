@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Plane, Bus, MapPin } from "lucide-react";
 
 export default function Pricing() {
+  const jotformUrl = "https://pci.jotform.com/form/252710672217049";
+
   return (
     <Layout>
       <main className="min-h-screen bg-white text-gray-900 flex flex-col items-center px-6 py-20">
@@ -32,10 +34,15 @@ export default function Pricing() {
                   <span>Monthly Pass</span> <span>$225</span>
                 </li>
               </ul>
-              {/* FIXED: Internal Link */}
-              <Link to="/book-ride" className="block text-center w-full bg-purple-700 text-white py-3 rounded-xl font-bold hover:bg-purple-800 transition">
+              {/* FIXED: External Link to Jotform */}
+              <a 
+                href={jotformUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center w-full bg-purple-700 text-white py-3 rounded-xl font-bold hover:bg-purple-800 transition"
+              >
                 Book a Ride
-              </Link>
+              </a>
             </div>
 
             {/* On-Demand Pricing */}
@@ -57,7 +64,6 @@ export default function Pricing() {
                 </li>
                 <li className="text-sm text-gray-500 italic">Weekly/Monthly pricing coming soon.</li>
               </ul>
-              {/* FIXED: Internal Link */}
               <Link to="/contact" className="block text-center w-full bg-purple-700 text-white py-3 rounded-xl font-bold hover:bg-purple-800 transition">
                 Inquire for Rates
               </Link>
@@ -70,17 +76,16 @@ export default function Pricing() {
               <ul className="text-left space-y-4 mb-8 text-gray-700">
                 <li className="flex flex-col border-b pb-2">
                   <span className="text-sm text-gray-500">Mobile (MOB)</span>
-                  <span className="text-xl font-bold">$90 Flat Rate</span>
+                  <span className="text-xl font-bold font-semibold text-gray-900">$90 Flat Rate</span>
                 </li>
                 <li className="flex flex-col border-b pb-2">
                   <span className="text-sm text-gray-500">Gulfport (GPT)</span>
-                  <span className="text-xl font-bold">$165 Flat Rate</span>
+                  <span className="text-xl font-bold font-semibold text-gray-900">$165 Flat Rate</span>
                 </li>
                 <p className="text-xs text-gray-500 italic mt-4">
                   *New Orleans and long-distance trips subject to higher rates.
                 </p>
               </ul>
-              {/* FIXED: Internal Link */}
               <Link to="/contact" className="block text-center w-full border-2 border-purple-700 text-purple-700 py-3 rounded-xl font-bold hover:bg-purple-50 transition">
                 Get a Quote
               </Link>
@@ -93,7 +98,6 @@ export default function Pricing() {
             <p className="text-gray-600 mb-6 max-w-xl">
               As a 501(c)3 nonprofit, your fares and donations directly support workforce mobility in Moss Point.
             </p>
-            {/* FIXED: Internal Link to Sponsor/Donate page */}
             <Link to="/sponsor" className="inline-block bg-green-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg">
               Donate to MAC Bus
             </Link>
