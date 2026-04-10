@@ -6,6 +6,7 @@ import macbusLogo from "../assets/macbus-logo.PNG";
 
 export default function HomePage() {
   const jotformUrl = "https://pci.jotform.com/form/252710672217049";
+  const squareDonateUrl = "http://square.link/u/t6l3KI4l";
 
   return (
     <Layout>
@@ -50,7 +51,6 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
-              {/* FIXED: Pointed to Jotform */}
               <a 
                 href={jotformUrl}
                 target="_blank"
@@ -59,10 +59,15 @@ export default function HomePage() {
               >
                 Request a Ride
               </a>
-              <Link to="/sponsor" className="bg-green-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-green-500 transition-all text-lg">
+              <a 
+                href={squareDonateUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-green-500 hover:scale-105 transition-all text-lg flex items-center justify-center"
+              >
                 Donate Now
-              </Link>
-              <Link to="/contact" className="bg-purple-800/40 backdrop-blur-sm border-2 border-white/50 text-white font-bold px-8 py-4 rounded-xl hover:bg-white hover:text-purple-700 transition-all text-lg">
+              </a>
+              <Link to="/contact" className="bg-purple-800/40 backdrop-blur-sm border-2 border-white/50 text-white font-bold px-8 py-4 rounded-xl hover:bg-white hover:text-purple-700 transition-all text-lg flex items-center justify-center">
                 Become a Partner
               </Link>
             </div>
@@ -72,8 +77,9 @@ export default function HomePage() {
         {/* 501(c)(3) Credibility Section */}
         <section className="py-12 px-6 bg-white border-b">
           <div className="max-w-4xl mx-auto text-center">
+            {/* UPDATED: Removed "Official" */}
             <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-800 px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest mb-6">
-              <Landmark size={16} /> Official 501(c)(3) Nonprofit
+              <Landmark size={16} /> 501(c)(3) Nonprofit
             </div>
             <p className="text-xl text-gray-700 leading-relaxed">
               <strong>Mississippi Access Connect Bus, Inc.</strong> is a nonprofit organization focused on providing equitable transportation access, workforce mobility, and community connectivity. 100% of your support goes directly toward keeping our community moving.
@@ -142,7 +148,6 @@ export default function HomePage() {
           <p className="mb-10 max-w-xl mx-auto text-gray-600 text-lg">
             Experience the future of community transit today.
           </p>
-          {/* FIXED: Pointed to Jotform */}
           <a 
             href={jotformUrl}
             target="_blank"

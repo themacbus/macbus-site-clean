@@ -5,6 +5,7 @@ import { Plane, Bus, MapPin } from "lucide-react";
 
 export default function Pricing() {
   const jotformUrl = "https://pci.jotform.com/form/252710672217049";
+  const squareDonateUrl = "http://square.link/u/t6l3KI4l";
 
   return (
     <Layout>
@@ -98,9 +99,15 @@ export default function Pricing() {
             <p className="text-gray-600 mb-6 max-w-xl">
               As a 501(c)3 nonprofit, your fares and donations directly support workforce mobility in Moss Point.
             </p>
-            <Link to="/sponsor" className="inline-block bg-green-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg">
+            {/* FIXED: Updated to Square Link */}
+            <a 
+              href={squareDonateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-green-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg"
+            >
               Donate to MAC Bus
-            </Link>
+            </a>
           </div>
         </div>
       </main>

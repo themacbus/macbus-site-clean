@@ -10,10 +10,12 @@ import {
   Zap, 
   ArrowRight 
 } from "lucide-react";
-import { Link } from "react-router-dom"; // IMPORTED LINK
+import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 
 export default function Programs() {
+  const squareDonateUrl = "http://square.link/u/t6l3KI4l";
+
   const programs = [
     {
       title: "Community Connector Rides",
@@ -122,13 +124,15 @@ export default function Programs() {
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Have questions about our programs?</h2>
             <p className="text-gray-600 mb-8">We are always looking for community partners, sponsors, and volunteers.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-               {/* FIXED: Links to Sponsor Page */}
-               <Link 
-                to="/sponsor" 
+               {/* FIXED: Pointed to Square Donation Link */}
+               <a 
+                href={squareDonateUrl} 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-purple-700 text-white px-8 py-3 rounded-xl font-bold hover:bg-purple-800 transition shadow-lg flex items-center justify-center gap-2"
                >
                  Get Involved <ArrowRight size={18} />
-               </Link>
+               </a>
                
                {/* FIXED: Links to Contact Page */}
                <Link 
