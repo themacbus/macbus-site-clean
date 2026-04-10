@@ -10,6 +10,7 @@ import {
   Zap, 
   ArrowRight 
 } from "lucide-react";
+import { Link } from "react-router-dom"; // IMPORTED LINK
 import Layout from "../components/Layout";
 
 export default function Programs() {
@@ -76,7 +77,7 @@ export default function Programs() {
             </h1>
             <p className="text-lg md:text-xl text-purple-100 leading-relaxed">
               Operated by <span className="text-white font-bold">Mississippi Access Connect Bus, Inc.</span> — 
-              a 501(c)(3) nonprofit (pending) dedicated to reducing transportation barriers in Jackson County.
+              a 501(c)(3) nonprofit dedicated to reducing transportation barriers in Jackson County.
             </p>
           </div>
         </section>
@@ -121,12 +122,21 @@ export default function Programs() {
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Have questions about our programs?</h2>
             <p className="text-gray-600 mb-8">We are always looking for community partners, sponsors, and volunteers.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-               <button className="bg-purple-700 text-white px-8 py-3 rounded-xl font-bold hover:bg-purple-800 transition shadow-lg flex items-center justify-center gap-2">
+               {/* FIXED: Links to Sponsor Page */}
+               <Link 
+                to="/sponsor" 
+                className="bg-purple-700 text-white px-8 py-3 rounded-xl font-bold hover:bg-purple-800 transition shadow-lg flex items-center justify-center gap-2"
+               >
                  Get Involved <ArrowRight size={18} />
-               </button>
-               <button className="border-2 border-purple-200 text-purple-700 px-8 py-3 rounded-xl font-bold hover:bg-purple-50 transition">
+               </Link>
+               
+               {/* FIXED: Links to Contact Page */}
+               <Link 
+                to="/contact" 
+                className="border-2 border-purple-200 text-purple-700 px-8 py-3 rounded-xl font-bold hover:bg-purple-50 transition flex items-center justify-center"
+               >
                  Contact Us
-               </button>
+               </Link>
             </div>
           </div>
         </section>
