@@ -59,6 +59,8 @@ export default function HomePage() {
               >
                 Request a Ride
               </a>
+
+              {/* CONFIRMED: External link to Square */}
               <a 
                 href={squareDonateUrl}
                 target="_blank"
@@ -67,6 +69,7 @@ export default function HomePage() {
               >
                 Donate Now
               </a>
+
               <Link to="/contact" className="bg-purple-800/40 backdrop-blur-sm border-2 border-white/50 text-white font-bold px-8 py-4 rounded-xl hover:bg-white hover:text-purple-700 transition-all text-lg flex items-center justify-center">
                 Become a Partner
               </Link>
@@ -77,7 +80,6 @@ export default function HomePage() {
         {/* 501(c)(3) Credibility Section */}
         <section className="py-12 px-6 bg-white border-b">
           <div className="max-w-4xl mx-auto text-center">
-            {/* UPDATED: Removed "Official" */}
             <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-800 px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest mb-6">
               <Landmark size={16} /> 501(c)(3) Nonprofit
             </div>
