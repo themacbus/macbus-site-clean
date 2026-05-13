@@ -1,38 +1,70 @@
+/* Core Layout */
 .App {
   text-align: center;
+  font-family: 'Inter', sans-serif; /* Clean, modern font */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
+/* Updated Header for a Landing Page feel */
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url('https://www.themacbus.org/static/media/bus-hero.jpg'); /* Replace with your actual bus image path */
+  background-size: cover;
+  background-position: center;
+  min-height: 80vh; /* Reduced height for a landing page hero */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+/* --- BUTTON ANIMATIONS --- */
+
+/* This makes the buttons feel "Clickable" */
+.cta-button {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+/* Hover: Button grows and glows slightly */
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
+}
+
+/* Click/Active: Button "sinks" into the page */
+.cta-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- ENTRANCE ANIMATIONS --- */
+
+/* Smooth Fade and Slide up when the page loads */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+/* Utility to delay animations (useful for cards side-by-side) */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
+/* The spinning logo—usually you can remove this for a professional site, 
+   but we'll keep it here in case you want to use it for a loading spinner */
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

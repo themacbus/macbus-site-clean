@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ClipboardCheck, Bus, Handshake, Landmark } from "lucide-react";
+import { ClipboardCheck, Bus, Handshake, Landmark, Users } from "lucide-react";
 import Layout from "../components/Layout"; 
 import macbusLogo from "../assets/macbus-logo.PNG";
 
@@ -23,15 +23,15 @@ export default function HomePage() {
               href="https://tinyurl.com/The-MAC-Survey"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-purple-900 text-xs md:text-sm font-bold py-1.5 px-4 rounded-full hover:bg-purple-100 transition shadow-sm uppercase tracking-wider"
+              className="bg-white text-purple-900 text-xs md:text-sm font-bold py-1.5 px-4 rounded-full hover:bg-purple-100 transition active:scale-95 shadow-sm uppercase tracking-wider"
             >
               Take Survey →
             </a>
           </div>
         </section>
 
-        {/* Hero Section */}
-        <section className="relative text-center py-20 px-6 bg-gradient-to-br from-purple-700 via-purple-600 to-indigo-600 text-white overflow-hidden">
+        {/* Hero Section - Added fade-in-up animation */}
+        <section className="relative text-center py-20 px-6 bg-gradient-to-br from-purple-700 via-purple-600 to-indigo-600 text-white overflow-hidden fade-in-up">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
             <div className="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full blur-3xl"></div>
           </div>
@@ -47,7 +47,7 @@ export default function HomePage() {
             </h1>
             
             <p className="text-lg md:text-2xl max-w-3xl mx-auto mb-10 text-purple-50 font-light leading-relaxed">
-              Mississippi Access Connect Bus, Inc. is committed to providing reliable, affordable, and accessible transportation that connects people to opportunity, supports workforce mobility, and strengthens communities.
+              Mississippi Access Connect Bus, Inc. is committed to providing reliable, affordable, and accessible transportation that strengthens communities.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-2xl mx-auto">
@@ -55,41 +55,40 @@ export default function HomePage() {
                 href={jotformUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-purple-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:scale-105 transition-all text-lg flex items-center justify-center"
+                className="cta-button bg-white text-purple-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:scale-105 active:scale-95 transition-all text-lg flex items-center justify-center"
               >
                 Request a Ride
               </a>
 
-              {/* CONFIRMED: External link to Square */}
               <a 
                 href={squareDonateUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-green-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-green-500 hover:scale-105 transition-all text-lg flex items-center justify-center"
+                className="cta-button bg-green-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-green-500 hover:scale-105 active:scale-95 transition-all text-lg flex items-center justify-center"
               >
                 Donate Now
               </a>
 
-              <Link to="/contact" className="bg-purple-800/40 backdrop-blur-sm border-2 border-white/50 text-white font-bold px-8 py-4 rounded-xl hover:bg-white hover:text-purple-700 transition-all text-lg flex items-center justify-center">
-                Become a Partner
+              <Link to="/apply" className="cta-button bg-purple-800/40 backdrop-blur-sm border-2 border-white/50 text-white font-bold px-8 py-4 rounded-xl hover:bg-white hover:text-purple-700 active:scale-95 transition-all text-lg flex items-center justify-center">
+                Join Our Team
               </Link>
             </div>
           </div>
         </section>
 
-        {/* 501(c)(3) Credibility Section */}
-        <section className="py-12 px-6 bg-white border-b">
+        {/* 501(c)(3) Credibility - Added fade-in-up with delay */}
+        <section className="py-12 px-6 bg-white border-b fade-in-up delay-1">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-800 px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest mb-6">
               <Landmark size={16} /> 501(c)(3) Nonprofit
             </div>
             <p className="text-xl text-gray-700 leading-relaxed">
-              <strong>Mississippi Access Connect Bus, Inc.</strong> is a nonprofit organization focused on providing equitable transportation access, workforce mobility, and community connectivity. 100% of your support goes directly toward keeping our community moving.
+              <strong>Mississippi Access Connect Bus, Inc.</strong> is focused on providing equitable transportation access and workforce mobility.
             </p>
           </div>
         </section>
 
-        {/* Services At a Glance */}
+        {/* Services Grid - Cards now lift and respond to hover */}
         <section className="py-20 px-6 max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Our Services</h2>
@@ -97,15 +96,20 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: "Fixed Routes", desc: "Reliable, scheduled stops for daily commutes." },
-              { title: "On-Demand Rides", desc: "Flexible door-to-door service tailored to you." },
-              { title: "Airport Shuttles", desc: "Flat-rate transport to Mobile and Gulfport." },
-              { title: "Workforce Transit", desc: "Dedicated support for local employees." }
+              { title: "Fixed Routes", desc: "Reliable stops for daily commutes.", icon: <Bus size={32}/> },
+              { title: "On-Demand", desc: "Flexible door-to-door service.", icon: <Bus size={32}/> },
+              { title: "Careers", desc: "We are hiring drivers in Moss Point!", icon: <Users size={32}/>, link: "/apply" },
+              { title: "Workforce", desc: "Support for local employees.", icon: <Handshake size={32}/> }
             ].map((service, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:border-purple-300 transition-colors">
-                <Bus className="text-purple-600 mb-4" size={32} />
+              <div key={i} className="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-purple-300 transition-all duration-300">
+                <div className="text-purple-600 mb-4 group-hover:scale-110 transition-transform">
+                  {service.icon}
+                </div>
                 <h3 className="font-bold text-lg mb-2">{service.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{service.desc}</p>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">{service.desc}</p>
+                {service.link && (
+                    <Link to={service.link} className="text-purple-700 font-bold text-sm hover:underline">Learn More →</Link>
+                )}
               </div>
             ))}
           </div>
@@ -128,17 +132,17 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* TEASER: Something Bigger is Coming */}
+        {/* Expansion Teaser */}
         <section className="py-20 px-6">
-          <div className="max-w-5xl mx-auto bg-purple-700 rounded-[3rem] p-10 md:p-16 text-center text-white shadow-2xl relative overflow-hidden">
+          <div className="max-w-5xl mx-auto bg-purple-700 rounded-[3rem] p-10 md:p-16 text-center text-white shadow-2xl relative overflow-hidden fade-in-up delay-2">
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-3xl rounded-full -mr-20 -mt-20"></div>
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-black mb-6">Something Bigger is Coming</h2>
               <p className="text-xl md:text-2xl text-purple-100 max-w-2xl mx-auto mb-8">
-                A new hub for mobility, connection, and opportunity is coming to Moss Point. We are expanding our reach and building the **MAC Mobility Hub**.
+                Building the **MAC Mobility Hub** in Moss Point.
               </p>
               <div className="inline-block bg-purple-900/50 backdrop-blur-md border border-purple-400 px-6 py-3 rounded-full font-bold tracking-wide">
-                🚀 Expansion & Community Impact 2026
+                🚀 Expansion 2026
               </div>
             </div>
           </div>
@@ -154,7 +158,7 @@ export default function HomePage() {
             href={jotformUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-purple-700 text-white font-bold px-12 py-5 rounded-full shadow-xl hover:bg-purple-800 transition-all text-lg"
+            className="cta-button inline-block bg-purple-700 text-white font-bold px-12 py-5 rounded-full shadow-xl hover:bg-purple-800 active:scale-95 transition-all text-lg"
           >
              Request a Ride Now
           </a>
